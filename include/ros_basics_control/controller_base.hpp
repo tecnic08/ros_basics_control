@@ -71,7 +71,7 @@ namespace ros_tp {
         bool remove_waypoint(size_t idx)
         {
             const std::lock_guard<std::mutex> lock(_waypoint_lock);
-            if (_waypoints.size() >= idx) {
+            if (_waypoints.size() > idx) {
                 _waypoints.erase(_waypoints.begin() + idx);
                 return true;
             }
