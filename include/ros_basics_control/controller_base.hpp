@@ -71,7 +71,7 @@ namespace ros_tp {
         bool remove_waypoint(size_t idx)
         {
             const std::lock_guard<std::mutex> lock(_waypoint_lock);
-            if (_waypoints.size() < idx) {
+            if (_waypoints.size() >= idx) {
                 _waypoints.erase(_waypoints.begin() + idx);
                 return true;
             }
@@ -97,10 +97,10 @@ namespace ros_tp {
         {
             const std::lock_guard<std::mutex> lock(_waypoint_lock);
             if (_waypoints.size() == 0) {
-                return std::make_pair(geometry_msgs::Pose2D(), false);
+                return std::make_pair(geometry_msgs::Pose2D(), true);
             }
             else {
-                return std::make_pair(_waypoints[0], true);
+                return std::make_pair(_waypoints[0], false);
             }
         }
 
