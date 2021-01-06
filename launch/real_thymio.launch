@@ -1,0 +1,9 @@
+<launch>
+
+    <arg name="ns" default="/" />
+    <group ns="$(arg ns)">
+        <node name="thymio_ctrl_node" pkg="ros_basics_control" type="thymio_ctrl_node" output="screen"/>
+        <node name="thymio_intf_node" pkg="ros_basics_control" type="thymio_intf_node.py" output="screen"/>
+    </group>
+
+</launch>
