@@ -6,4 +6,6 @@
         <node name="thymio_intf_node" pkg="ros_basics_control" type="thymio_intf_node.py" output="screen"/>
     </group>
 
+    <include file="$(find ros_basics_vision)/launch/thymio_tracker.launch" ns="$(arg ns)"/>
+
 </launch>

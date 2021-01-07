@@ -16,6 +16,7 @@ namespace ros_tp {
 
         std::shared_ptr<ros::NodeHandle> _nh;
         ros::Subscriber _odom_sub;
+        ros::Publisher _pose_pub;
     };
 
 } // namespace ros_tp
