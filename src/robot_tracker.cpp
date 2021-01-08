@@ -1,6 +1,9 @@
 #include <ros_basics_control/robot_tracker.h>
 
 namespace ros_tp {
+    RobotTracker::RobotTracker() {}
+    RobotTracker::RobotTracker(std::shared_ptr<ros::NodeHandle>) {}
+
     RobotTracker::Pose RobotTracker::get_pose() const
     {
         Pose pose;

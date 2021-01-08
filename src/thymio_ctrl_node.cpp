@@ -20,11 +20,10 @@ int main(int argc, char** argv)
     ros::init(argc, argv, "thymio_ctrl_node");
     ros::NodeHandle nh;
 
-    Thymio<ThymioInterfaceBase, ControllerBase<Params>, GazeboRobotTracker> th(std::make_shared<ros::NodeHandle>(nh), false);
+    ControllerBase<Params> ctrl_base(std::make_shared<ros::NodeHandle>(nh));
 
-    ros::Rate loop_rate(10);
+    ros::Rate loop_rate(30);
     while (ros::ok()) {
-        th.spin_control();
         ros::spinOnce();
         loop_rate.sleep();
     }

@@ -14,7 +14,7 @@ namespace ros_tp {
 
         ThymioInterfaceBase(std::shared_ptr<ros::NodeHandle> nh, bool advertise);
 
-        virtual void set_target_velocities(double v, double z) {}
+        virtual void set_target_velocities(double v, double z);
 
     protected:
         void _set_velocities_cb(const ros_basics_msgs::SimpleVelocities::ConstPtr& msg);

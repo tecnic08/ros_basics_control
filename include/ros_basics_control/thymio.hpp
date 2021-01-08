@@ -14,9 +14,9 @@ namespace ros_tp {
                                                                              _ti(nh, advertise),
                                                                              _tracker(_nh) {}
 
-        void spin_control()
+        void spin_control(bool verbose = false)
         {
-            _ctrl.move(_tracker.get_pose(), _ti);
+            _ctrl.move(_tracker.get_pose(), _ti, verbose);
         }
 
         Controller& get_controller()

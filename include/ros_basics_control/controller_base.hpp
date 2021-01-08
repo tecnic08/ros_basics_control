@@ -7,6 +7,7 @@
 #include <ros_basics_msgs/CurrentWaypoint.h>
 #include <ros_basics_msgs/GetWaypoints.h>
 #include <ros_basics_msgs/SetWaypoints.h>
+#include <ros_basics_msgs/CheckWaypointReached.h>
 
 #include <geometry_msgs/Pose2D.h>
 
@@ -17,7 +18,7 @@
 namespace ros_tp {
     namespace defaults {
         struct ControllerParams {
-            static constexpr double precision = 0.01;
+            static constexpr double precision = 0.025;
         };
     } // namespace defaults
 
@@ -33,15 +34,16 @@ namespace ros_tp {
             _current_waypoint_srv = _nh->advertiseService("current_waypoint", &ControllerBase::_current_waypoint_service_cb, this);
             _get_waypoints_srv = _nh->advertiseService("get_waypoints", &ControllerBase::_get_waypoints_service_cb, this);
             _set_waypoints_srv = _nh->advertiseService("set_waypoints", &ControllerBase::_set_waypoints_service_cb, this);
+            _check_waypoint_reached_srv = _nh->advertiseService("check_waypoint_reached", &ControllerBase::_check_waypoint_reached_service_cb, this);
         }
 
         template <typename ThymioInterface>
-        void move(const Pose& pose, ThymioInterface& ti)
+        void move(const Pose& pose, ThymioInterface& ti, bool verbose = false)
         {
             ROS_DEBUG_ONCE("You are using the controller's server API");
         }
 
-        bool check_current_waypoint(const Pose& pose, bool verbose = true)
+        bool check_current_waypoint(const Pose& pose, bool verbose = false)
         {
             const std::lock_guard<std::mutex> lock(_waypoint_lock);
             if (_waypoints.size()) {
@@ -145,6 +147,14 @@ namespace ros_tp {
             return true;
         }
 
+        bool _check_waypoint_reached_service_cb(
+            ros_basics_msgs::CheckWaypointReached::Request& req,
+            ros_basics_msgs::CheckWaypointReached::Response& res)
+        {
+            res.reached = check_current_waypoint(req.pose, req.verbose);
+            return true;
+        }
+
         double _angle_to_pipi(double angle)
         {
             while (true) {
@@ -167,6 +177,7 @@ namespace ros_tp {
         ros::ServiceServer _current_waypoint_srv;
         ros::ServiceServer _get_waypoints_srv;
         ros::ServiceServer _set_waypoints_srv;
+        ros::ServiceServer _check_waypoint_reached_srv;
 
         std::vector<geometry_msgs::Pose2D> _waypoints;
         std::mutex _waypoint_lock;

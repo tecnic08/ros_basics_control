@@ -7,13 +7,13 @@
   <maintainer email="b.papaspyros@gmail.com">Vaios Papaspyros</maintainer>
   <license>BSD</license>
 
-  <build_depend>ros_basics_msgs</build_depend>
   <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>roscpp</build_depend>
   <build_depend>rospy</build_depend>
   <build_depend>std_msgs</build_depend>
   <build_depend>geometry_msgs</build_depend>
+  <build_depend>ros_basics_msgs</build_depend>
   <build_depend>message_generation</build_depend>
   
   <build_export_depend>ros_basics_msgs</build_export_depend>
