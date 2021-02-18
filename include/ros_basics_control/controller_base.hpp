@@ -18,7 +18,7 @@
 namespace ros_tp {
     namespace defaults {
         struct ControllerParams {
-            static constexpr double precision = 0.025;
+            static constexpr double precision = 0.015;
         };
     } // namespace defaults
 
