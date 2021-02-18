@@ -8,6 +8,7 @@
     <include file="$(find gazebo_ros)/launch/empty_world.launch" ns="$(arg ns)" >
         <arg name="paused" value="false"/>
         <arg name="verbose" value="true"/>
+        <arg name="gui" value="true"/>
     </include>
 
     <include file="$(find ros_basics_models)/launch/setup_gazebo.launch" ns="$(arg ns)">
