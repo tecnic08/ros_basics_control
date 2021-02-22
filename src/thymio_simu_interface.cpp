@@ -57,11 +57,7 @@ namespace ros_tp {
     void ThymioSimuInterface::_publish_prox_values(double value, int idx)
     {
         const std::lock_guard<std::mutex> lock(_pval_lock);
-        std::cout << "in1" << std::endl;
         if (_sensor_counter == _prox_sensor_values.size()) {
-            std::cout << "in2" << std::endl;
-            std::cout << _prox_sensor_values[0] << std::endl;
-
             ros_basics_msgs::ProximitySensors msg;
             msg.header.stamp = ros::Time::now();
             msg.values = _prox_sensor_values;
