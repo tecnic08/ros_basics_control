@@ -60,7 +60,7 @@ class ThymioInterface:
         self._move(l_speed, r_speed)
 
     def _move(self, l_speed, r_speed):
-        print("(l, r): ({}, {})".format(l_speed, r_speed))
+        # print("(l, r): ({}, {})".format(l_speed, r_speed))
         l_speed = l_speed if l_speed >= 0 else 2 ** 16 + l_speed
         r_speed = r_speed if r_speed >= 0 else 2 ** 16 + r_speed
         self._th[self._id]["motor.left.target"] = l_speed
